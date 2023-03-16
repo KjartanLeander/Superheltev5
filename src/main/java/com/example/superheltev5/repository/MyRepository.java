@@ -48,15 +48,13 @@ public class MyRepository implements Irepository {
     public HeroPowerDTO heroPower(String name) {  //localhost:8080/superhelte/batman
         HeroPowerDTO herpowerdto = null;
         try (Connection con = DriverManager.getConnection(db_url, uid, pwd)) {
-            String SQL = "SELECT s.HERO_NAME,s.REAL_NAME,sp.SUPERPOWER FROM SUPERHERO s JOIN SUPERPOWER sp ON s.SUPERHERO_ID = sp.SUPERPOWER_ID  WHERE HERO_NAME = ?";
+            String SQL = "SELECT sp.SUPERPOWER FROM SUPERHERO s JOIN SUPERPOWER sp ON s.SUPERHERO_ID = sp.SUPERPOWER_ID  WHERE HERO_NAME = ?";
             PreparedStatement pstmt = con.prepareStatement(SQL);
             pstmt.setString(1, name);
             ResultSet rs = pstmt.executeQuery();
             if (rs.next()) {
-                String heroName = rs.getString("HERO_NAME");
-                String realName = rs.getString("REAL_NAME");
                 String superpower = rs.getString("SUPERPOWER");
-                herpowerdto = new HeroPowerDTO(heroName, realName, superpower);
+                herpowerdto = new HeroPowerDTO(superpower);
             }
             return herpowerdto;
         } catch (SQLException e) {

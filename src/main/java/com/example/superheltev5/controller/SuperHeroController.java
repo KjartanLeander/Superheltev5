@@ -13,6 +13,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.List;
 @Controller
@@ -25,15 +26,16 @@ public class SuperHeroController {
         this.myService = myService;
     }
 
-   // @GetMapping(path = "/superheroes")
-   // public ResponseEntity<List<Superhero>> getSuperheroes() {
-     //   List<Superhero> superheroesList = myService.getSuperheroes();
-       // return new ResponseEntity<>(superheroesList, HttpStatus.OK);
-    //}
+    /*@GetMapping(path = "/superheroes")
+    public ResponseEntity<List<Superhero>> getSuperheroes() {
+        List<Superhero> superheroesList = myService.getSuperheroes();
+        return new ResponseEntity<>(superheroesList, HttpStatus.OK);
+    }*/
     @GetMapping(path = "/superheroes/superpower/{name}")
-    public ResponseEntity<HeroPowerDTO> heroPowerByName(@PathVariable String name){
-        HeroPowerDTO heroPowerDTO = myService.heroPowerDTO(name);
-        return new ResponseEntity<>(heroPowerDTO,HttpStatus.OK);
+    public String heroPowerByName(Model model, @PathVariable String name){
+        HeroPowerDTO heroPowerByName = myService.heroPowerDTO(name);
+        model.addAttribute("heroPowerByName",heroPowerByName);
+        return "Powers";
     }
     @GetMapping(path = "/city/{name}")
     public ResponseEntity<CityDTO> cityByHeroName(@PathVariable String name){
