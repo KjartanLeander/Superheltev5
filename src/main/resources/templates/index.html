@@ -12,6 +12,8 @@
         <th scope="col">Hero Name</th>
         <th scope="col">Real Name</th>
         <th scope="col">Creation Year</th>
+        <th scope="col">     </th>
+
     </tr>
     </thead>
     <tbody>
@@ -19,6 +21,11 @@
             <td th:text="${superhero.heroName}"/>
             <td th:text="${superhero.realName}"/>
             <td th:text="${superhero.creationYear}"/>
+            <td>
+            <a th:href="@{/kea/superpower/{heroname}(heroname=${superhero.heroName})}">
+                <button>Power</button>
+            </a>
+            </td>
         </tr>
     </tbody>
 </table>
