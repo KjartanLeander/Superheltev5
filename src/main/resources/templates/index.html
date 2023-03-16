@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<table class="table table-dark">
+    <thead>
+    <tr>
+        <th scope="col">Hero Name</th>
+        <th scope="col">Real Name</th>
+        <th scope="col">Creation Year</th>
+    </tr>
+    </thead>
+    <tbody>
+        <tr th:each="superhero:${Heroes}">
+            <td th:text="${superhero.heroName}"/>
+            <td th:text="${superhero.realName}"/>
+            <td th:text="${superhero.creationYear}"/>
+        </tr>
+    </tbody>
+</table>
+</body>
+</html>
+
