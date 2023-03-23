@@ -116,19 +116,17 @@ public class MyRepository implements Irepository {
     public List<String> getPowers() {
         List<String> powers = new ArrayList<>();
         try (Connection con = DriverManager.getConnection(db_url, uid, pwd)) {
-            String SQL = "SELECT superpower_name FROM superpower ORDER BY superpower_name ASC;";
+            String SQL = "SELECT SUPERPOWER FROM SUPERPOWER";
             Statement stmt = con.createStatement();
             ResultSet rs = stmt.executeQuery(SQL);
             while (rs.next()) {
-                String power = rs.getString("superpower_name");
+                String power = rs.getString("SUPERPOWER");
                 powers.add(power);
             }
-
         } catch (SQLException e) {
             e.printStackTrace();
         }
         return powers;
-
     }
 
     public void addSuperHero(SuperheroFormDTO form) {

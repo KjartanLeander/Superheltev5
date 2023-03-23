@@ -54,7 +54,7 @@ public class SuperHeroController {
         SuperheroFormDTO superheroFormDTO = new SuperheroFormDTO();
         model.addAttribute("CreateSuperhero", superheroFormDTO);
         model.addAttribute("city", myService.getCities());
-        model.addAttribute("power", myService.heroPowerDTO("name"));
+        model.addAttribute("power", myService.getPowers());
         return "add";
     }
 
