@@ -1,19 +1,14 @@
 package com.example.superheltev5.controller;
 
-import com.example.superheltev5.DTO.CityDTO;
-import com.example.superheltev5.DTO.CountPowerDTO;
-import com.example.superheltev5.DTO.HeroPowerDTO;
-import com.example.superheltev5.DTO.SuperheroDTO;
-import com.example.superheltev5.Entity.Superhero;
+import com.example.superheltev5.DTO.*;
+import com.example.superheltev5.repository.MyRepository;
 import com.example.superheltev5.service.MyService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.stereotype.Repository;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 @Controller
@@ -53,6 +48,24 @@ public class SuperHeroController {
         model.addAttribute("Heroes",superheroesList);
         return "index";
     }
+
+    @GetMapping(path="/add")
+    public String addSuperhero (Model model) {
+        SuperheroFormDTO superheroFormDTO = new SuperheroFormDTO();
+        model.addAttribute("CreateSuperhero", superheroFormDTO);
+        model.addAttribute("city", myService.getCities());
+        model.addAttribute("power", myService.heroPowerDTO("name"));
+        return "add";
+    }
+
+    @PostMapping(path = "/add")
+    public String addHero(@ModelAttribute("superhero") SuperheroFormDTO superheroFormDTO){
+        myService.addSuperhero(superheroFormDTO);
+        System.out.println(superheroFormDTO.toString());
+        return "redirect:/kea/superhero";
+    }
+
+
 }
 
 
